@@ -1,0 +1,1749 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI Plant Store",
+        "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://site1.seendoing.com"
+        }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/plants123": {
+            "get": {
+                "description": "Returns all plants from the system that the user has access to",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The maximum number of results to return",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Plant response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Plant"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new plant in the store",
+                "requestBody": {
+                    "description": "Plant to add to the store",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewPlant"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "plant response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Plant"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/plants/{id}": {
+            "delete": {
+                "description": "Deletes a single plant based on the ID supplied",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of plant to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Plant deleted",
+                        "content": {}
+                    },
+                    "400": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/query": {
+            "get": {
+                "summary": "查询普罗米修斯",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "example": "sort_desc(sum(increase(kong_ai_tokens_total{token_type=\"total_tokens\"}[90d])) by (project_id))",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "resultType": {
+                                                    "type": "string"
+                                                },
+                                                "result": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "metric": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "project_id": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "project_id"
+                                                                ]
+                                                            },
+                                                            "value": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "type": "number"
+                                                                        },
+                                                                        {
+                                                                            "type": "string"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "metric",
+                                                            "value"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "resultType",
+                                                "result"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        },
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hh": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "hh",
+                                        "01JAA4N7PZZKK6VWV5A566PV06"
+                                    ]
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/databases": {
+            "post": {
+                "summary": "创建数据库",
+                "deprecated": false,
+                "description": "创建新的数据库信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "密钥",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "知识库名称"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "知识库描述"
+                                    },
+                                    "prompt": {
+                                        "type": "string",
+                                        "description": "prompt设定"
+                                    },
+                                    "database_name": {
+                                        "type": "string",
+                                        "description": "数据库名称"
+                                    },
+                                    "database_type": {
+                                        "type": "string",
+                                        "description": "数据库类型，如：MySQL，PostgreSQL等"
+                                    },
+                                    "hostname": {
+                                        "type": "string",
+                                        "description": "数据库主机名或IP地址"
+                                    },
+                                    "port": {
+                                        "type": "integer",
+                                        "description": "数据库端口号"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "description": "链接数据库的用户名"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "数据库密码，应存储加密后的密码哈希"
+                                    }
+                                },
+                                "required": [
+                                    "database_name",
+                                    "database_type",
+                                    "hostname",
+                                    "port",
+                                    "username",
+                                    "password"
+                                ]
+                            },
+                            "example": {
+                                "name": "hello",
+                                "description": "this is a knowledge base",
+                                "prompt": "",
+                                "database_name": "library",
+                                "database_type": "postgresql",
+                                "hostname": "localhost",
+                                "port": 5432,
+                                "username": "postgres",
+                                "password": "baiyiyu"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": {
+                                                "id": "xK5gnMSRxHLA"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/databases/{database_id}": {
+            "get": {
+                "summary": "获取数据库信息",
+                "deprecated": false,
+                "description": "通过数据库 ID 获取数据库信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "database_id",
+                        "in": "path",
+                        "description": "数据库的唯一标识符",
+                        "required": true,
+                        "example": "xK5gnMSRxHLA",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "状态码"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "提示信息"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "唯一标识符，作为主键"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "description": "关联的用户ID"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "知识库名字"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "description": "知识库描述"
+                                                },
+                                                "prompt": {
+                                                    "type": "string",
+                                                    "description": "prompt设定"
+                                                },
+                                                "database_name": {
+                                                    "type": "string",
+                                                    "description": "数据库名称"
+                                                },
+                                                "database_type": {
+                                                    "type": "string",
+                                                    "description": "数据库类型，如 MySQL, PostgreSQL"
+                                                },
+                                                "hostname": {
+                                                    "type": "string",
+                                                    "description": "数据库主机名或 IP 地址"
+                                                },
+                                                "port": {
+                                                    "type": "integer",
+                                                    "description": "数据库端口号"
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "description": "连接数据库的用户名"
+                                                },
+                                                "created_at": {
+                                                    "type": "number",
+                                                    "description": "创建时间"
+                                                },
+                                                "updated_at": {
+                                                    "type": "number",
+                                                    "description": "更新时间"
+                                                },
+                                                "status": {
+                                                    "type": "boolean",
+                                                    "description": "数据库连接状态"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "user_id",
+                                                "name",
+                                                "description",
+                                                "prompt",
+                                                "database_name",
+                                                "database_type",
+                                                "hostname",
+                                                "port",
+                                                "username",
+                                                "created_at",
+                                                "updated_at",
+                                                "status"
+                                            ],
+                                            "description": "数据体"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data",
+                                        "01JAA0BFNP7SYMACCHK9Y9W82J"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": {
+                                                "id": "xK5gnMSRxHLA",
+                                                "user_id": "2d936649-2fbd-40ff-bc91-4ee2076550ac",
+                                                "name": "hello",
+                                                "description": "this is a knowledge base",
+                                                "prompt": "",
+                                                "database_name": "library",
+                                                "database_type": "postgresql",
+                                                "hostname": "localhost",
+                                                "port": 5432,
+                                                "username": "postgres",
+                                                "created_at": 1728732298.829782,
+                                                "updated_at": 1728732298.829782,
+                                                "status": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "put": {
+                "summary": "更新数据库信息",
+                "deprecated": false,
+                "description": "更新指定数据库的信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "database_id",
+                        "in": "path",
+                        "description": "数据库id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "密钥",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "知识库名字"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "知识库描述"
+                                    },
+                                    "prompt": {
+                                        "type": "string",
+                                        "description": "prompt设定"
+                                    },
+                                    "database_name": {
+                                        "type": "string",
+                                        "description": "数据库名称"
+                                    },
+                                    "database_type": {
+                                        "type": "string",
+                                        "description": "数据库类型，如 MySQL, PostgreSQL"
+                                    },
+                                    "hostname": {
+                                        "type": "string",
+                                        "description": "数据库主机名或 IP 地址"
+                                    },
+                                    "port": {
+                                        "type": "integer",
+                                        "description": "数据库端口号"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "description": "连接数据库的用户名"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "数据库密码"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "prompt",
+                                    "database_name",
+                                    "database_type",
+                                    "hostname",
+                                    "port",
+                                    "username",
+                                    "password"
+                                ]
+                            },
+                            "example": {
+                                "name": "hello",
+                                "description": "this is a knowledge base",
+                                "prompt": "you are a useful assistant.",
+                                "database_name": "library",
+                                "database_type": "postgresql",
+                                "hostname": "localhost",
+                                "port": 5432,
+                                "username": "postgres",
+                                "password": "baiyiyu"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "delete": {
+                "summary": "删除数据库信息",
+                "deprecated": false,
+                "description": "删除指定的数据库信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "database_id",
+                        "in": "path",
+                        "description": "数据库id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "密钥",
+                        "required": false,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/databases/list/data": {
+            "get": {
+                "summary": "获取数据库列表接口",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "唯一标识符，作为主键"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "description": "关联的用户ID"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "知识库名字"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "description": "知识库描述"
+                                                    },
+                                                    "prompt": {
+                                                        "type": "string",
+                                                        "description": "prompt设定"
+                                                    },
+                                                    "database_name": {
+                                                        "type": "string",
+                                                        "description": "数据库名称"
+                                                    },
+                                                    "database_type": {
+                                                        "type": "string",
+                                                        "description": "数据库类型，如 MySQL, PostgreSQL"
+                                                    },
+                                                    "hostname": {
+                                                        "type": "string",
+                                                        "description": "数据库主机名或 IP 地址"
+                                                    },
+                                                    "port": {
+                                                        "type": "integer",
+                                                        "description": "数据库端口号"
+                                                    },
+                                                    "username": {
+                                                        "type": "string",
+                                                        "description": "连接数据库的用户名"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "number",
+                                                        "description": "创建时间"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "number",
+                                                        "description": "更新时间"
+                                                    },
+                                                    "status": {
+                                                        "type": "boolean",
+                                                        "description": "数据库连接状态"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "user_id",
+                                                    "name",
+                                                    "description",
+                                                    "prompt",
+                                                    "database_name",
+                                                    "database_type",
+                                                    "hostname",
+                                                    "port",
+                                                    "username",
+                                                    "created_at",
+                                                    "updated_at",
+                                                    "status"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": "zyfyFJsiwudt",
+                                                    "user_id": "2d936649-2fbd-40ff-bc91-4ee2076550ac",
+                                                    "name": "hello",
+                                                    "description": "this is a knowledge base",
+                                                    "prompt": "",
+                                                    "database_name": "library",
+                                                    "database_type": "postgresql",
+                                                    "hostname": "localhost",
+                                                    "port": 5432,
+                                                    "username": "postgres",
+                                                    "created_at": 1728524158.594638,
+                                                    "updated_at": 1728524158.594638,
+                                                    "status": true
+                                                },
+                                                {
+                                                    "id": "xK5gnMSRxHLA",
+                                                    "user_id": "2d936649-2fbd-40ff-bc91-4ee2076550ac",
+                                                    "name": "hello",
+                                                    "description": "this is a knowledge base",
+                                                    "prompt": "",
+                                                    "database_name": "library",
+                                                    "database_type": "postgresql",
+                                                    "hostname": "localhost",
+                                                    "port": 5432,
+                                                    "username": "postgres",
+                                                    "created_at": 1728732298.829782,
+                                                    "updated_at": 1728732298.829782,
+                                                    "status": true
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/databases/{database_id}/connection_status": {
+            "get": {
+                "summary": "测试数据库连接状态接口",
+                "deprecated": false,
+                "description": "测试指定数据库的连接状态。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "database_id",
+                        "in": "path",
+                        "description": "数据id",
+                        "required": true,
+                        "example": "OjBgxScYnLnO",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpOYDXQmMRgRMjQzV0PMahsfzIkq7VyXzqLhrx4YF8Fyp5w",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "状态码"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "相应信息"
+                                        },
+                                        "data": {
+                                            "type": "boolean",
+                                            "description": "数据库连接状态"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "Connection successful",
+                                            "data": true
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/conversation": {
+            "post": {
+                "summary": "创建对话信息",
+                "deprecated": false,
+                "description": "创建新的对话信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "database_id": {
+                                        "type": "string",
+                                        "description": "数据库的唯一标识符"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "会话名称"
+                                    }
+                                },
+                                "required": [
+                                    "database_id"
+                                ]
+                            },
+                            "example": {
+                                "database_id": "xK5gnMSRxHLA",
+                                "name": "hello"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "状态码"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "响应信息"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "id"
+                                                }
+                                            },
+                                            "required": [
+                                                "id"
+                                            ],
+                                            "description": "数据"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": {
+                                                "id": "8052ec08-c034-4816-8dd8-10ddb999c90c"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/conversation/{conversation_id}": {
+            "get": {
+                "summary": "获取对话信息",
+                "deprecated": false,
+                "description": "通过 ID 获取对话信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "conversation_id",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "example": "8052ec08-c034-4816-8dd8-10ddb999c90c",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "状态码"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "响应信息"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "对话id"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "对话名称"
+                                                },
+                                                "database_id": {
+                                                    "type": "string",
+                                                    "description": "数据库id"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "description": "用户id"
+                                                },
+                                                "created_at": {
+                                                    "type": "number",
+                                                    "description": "创建时间"
+                                                },
+                                                "updated_at": {
+                                                    "type": "number",
+                                                    "description": "更新时间"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "name",
+                                                "database_id",
+                                                "user_id",
+                                                "created_at",
+                                                "updated_at"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": {
+                                                "id": "8052ec08-c034-4816-8dd8-10ddb999c90c",
+                                                "name": "hello",
+                                                "database_id": "xK5gnMSRxHLA",
+                                                "user_id": "2d936649-2fbd-40ff-bc91-4ee2076550ac",
+                                                "created_at": 1728733882.713548,
+                                                "updated_at": 1728733882.713548
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            },
+            "delete": {
+                "summary": "删除对话信息",
+                "deprecated": false,
+                "description": "删除指定 ID 的对话信息。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "conversation_id",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "example": "8052ec08-c034-4816-8dd8-10ddb999c90c",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/conversation/list/data": {
+            "get": {
+                "summary": "获取用户对话列表",
+                "deprecated": false,
+                "description": "获取指定数据库 ID 下用户的对话列表。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "database_id": {
+                                        "type": "string",
+                                        "description": "数据库id"
+                                    }
+                                },
+                                "required": [
+                                    "database_id"
+                                ]
+                            },
+                            "example": {
+                                "database_id": "xK5gnMSRxHLA"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "状态码"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "响应信息"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "对话的 ID"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "对话的名称"
+                                                    },
+                                                    "database_id": {
+                                                        "type": "string",
+                                                        "description": "数据库的 ID"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "string",
+                                                        "description": "用户的 ID"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "number",
+                                                        "description": "创建时间"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "number",
+                                                        "description": "更新时间"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": "8052ec08-c034-4816-8dd8-10ddb999c90c",
+                                                    "name": "hello",
+                                                    "database_id": "xK5gnMSRxHLA",
+                                                    "user_id": "2d936649-2fbd-40ff-bc91-4ee2076550ac",
+                                                    "created_at": 1728733882.713548,
+                                                    "updated_at": 1728733882.713548
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/chat/stream": {
+            "post": {
+                "summary": "聊天流式",
+                "deprecated": false,
+                "description": "与系统进行实时聊天，获取流式数据分析结果。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzEwNTY5NjQsInN1YiI6IjJkOTM2NjQ5LTJmYmQtNDBmZi1iYzkxLTRlZTIwNzY1NTBhYyJ9.CN67CGzdPPA2hYTF_wm9M2nrh07v3bGY92BmbiX1pko",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpOYDXQmMRgRMjQzV0PMahsfzIkq7VyXzqLhrx4YF8Fyp5w",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "聊天内容"
+                                    },
+                                    "session_id": {
+                                        "type": "string",
+                                        "description": "会话的唯一标识符"
+                                    }
+                                },
+                                "required": [
+                                    "text",
+                                    "session_id"
+                                ]
+                            },
+                            "example": "{\r\n    \"text\": \"我想知道现在知识库有哪些用户\", // 输入的文本\r\n    \"session_id\": \"8052ec08-c034-4816-8dd8-10ddb999c90c\"\r\n}"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/v1/chat": {
+            "post": {
+                "summary": "聊天",
+                "deprecated": false,
+                "description": "与系统进行聊天，并获取相关数据分析结果。",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "聊天内容"
+                                    },
+                                    "session_id": {
+                                        "type": "string",
+                                        "description": "会话的唯一标识符"
+                                    }
+                                },
+                                "required": [
+                                    "text",
+                                    "session_id"
+                                ]
+                            },
+                            "example": "{\r\n    \"text\": \"我想知道现在知识库有哪些用户？\", // 输入的文本\r\n    \"session_id\": \"5d25fcde-eb4f-4af1-a2ad-c7a1aa68c20b\"\r\n}"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "状态码"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "响应信息"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "chart_data": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "data": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "labels": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "datasets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "label": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "data": {
+                                                                                "type": "array",
+                                                                                "items": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "labels",
+                                                                "datasets"
+                                                            ]
+                                                        },
+                                                        "options": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "responsive": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "plugins": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "legend": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "position": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "position"
+                                                                            ]
+                                                                        },
+                                                                        "title": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "display": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "text": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "display",
+                                                                                "text"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "legend",
+                                                                        "title"
+                                                                    ]
+                                                                },
+                                                                "scales": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "x": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "display": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "title": {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "display": {
+                                                                                            "type": "boolean"
+                                                                                        },
+                                                                                        "text": {
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "required": [
+                                                                                        "display",
+                                                                                        "text"
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "display",
+                                                                                "title"
+                                                                            ]
+                                                                        },
+                                                                        "y": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "display": {
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "title": {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "display": {
+                                                                                            "type": "boolean"
+                                                                                        },
+                                                                                        "text": {
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "required": [
+                                                                                        "display",
+                                                                                        "text"
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "display",
+                                                                                "title"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "x",
+                                                                        "y"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "responsive",
+                                                                "plugins",
+                                                                "scales"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "type",
+                                                        "data",
+                                                        "options"
+                                                    ]
+                                                },
+                                                "text": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "chart_data",
+                                                "text"
+                                            ],
+                                            "description": "返回的数据，包括图表和文本"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": {
+                                                "chart_data": {
+                                                    "type": "bar",
+                                                    "data": {
+                                                        "labels": [
+                                                            "Rg91sWb5"
+                                                        ],
+                                                        "datasets": [
+                                                            {
+                                                                "label": "Users",
+                                                                "data": [
+                                                                    1
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    "options": {
+                                                        "responsive": true,
+                                                        "plugins": {
+                                                            "legend": {
+                                                                "position": "top"
+                                                            },
+                                                            "title": {
+                                                                "display": true,
+                                                                "text": "Active Users"
+                                                            }
+                                                        },
+                                                        "scales": {
+                                                            "x": {
+                                                                "display": true,
+                                                                "title": {
+                                                                    "display": true,
+                                                                    "text": "User ID"
+                                                                }
+                                                            },
+                                                            "y": {
+                                                                "display": true,
+                                                                "title": {
+                                                                    "display": true,
+                                                                    "text": "Count"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "text": "根据当前检索到的数据，知识库中当前活跃用户的信息如下：\n\n- **用户ID**：Rg91sWb5\n- **邮箱**：123@qq.com\n- **用户名**：zhou\n\n### 数据分析\n- 图表类型：条形图\n- 图表名称：活跃用户（Active Users）\n- X轴：用户ID\n- Y轴：用户数量\n- 数据集显示当前活跃用户的数量为1。\n\n### 见解\n当前的知识库用户数据有限，仅显示了一名活跃用户。如果需要进一步分析或扩展更多用户信息，建议检查数据源是否完整并确认检索条件是否准确。"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": {}
+                    }
+                },
+                "security": []
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Plant": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "The name of the plant",
+                        "type": "string"
+                    },
+                    "tag": {
+                        "description": "Tag to specify the type",
+                        "type": "string"
+                    }
+                }
+            },
+            "NewPlant": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Plant"
+                    },
+                    {
+                        "required": [
+                            "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "description": "Identification number of the plant",
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Error": {
+                "required": [
+                    "error",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

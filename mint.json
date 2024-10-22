@@ -1,0 +1,61 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Data API Reference",
+  "logo": {
+    "dark": "/logo/light.png",
+    "light": "/logo/light.png"
+  },
+  "favicon": "/favicon.svg",
+  
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373",
+    "anchors": {
+      "from": "#0D9373",
+      "to": "#07C983"
+    }
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "navigation": [
+    
+    {
+      "group": "API 文档",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "数据库（知识库）接口",
+      "pages": [
+        "api-reference/endpoint/databases_create",
+        "api-reference/endpoint/databases_getbyid",
+        "api-reference/endpoint/databases_getlist",
+        "api-reference/endpoint/databases_updbyid",
+        "api-reference/endpoint/databases_delbyid",
+        "api-reference/endpoint/databases_getstate"
+      ]
+    },
+    {
+      "group": "会话接口",
+      "pages": [
+        "api-reference/endpoint/conversation_create",
+        "api-reference/endpoint/conversation_delbyid",
+        "api-reference/endpoint/conversation_getbyid",
+        "api-reference/endpoint/conversation_getlist"
+      ]
+    },
+    {
+      "group": "Chat接口",
+      "pages": [
+        "api-reference/endpoint/chat_",
+        "api-reference/endpoint/chat_stream"
+      ]
+    }
+  ]
+}
