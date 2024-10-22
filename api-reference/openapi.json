@@ -242,9 +242,9 @@
         },
         "/api/v1/databases": {
             "post": {
-                "summary": "创建数据库",
+                "summary": "建立与数据库的连接",
                 "deprecated": false,
-                "description": "创建新的数据库信息。",
+                "description": "与现有的数据库的建立连接。",
                 "tags": [],
                 "parameters": [
                     {
@@ -266,27 +266,27 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "知识库名称"
+                                        "description": "数据库名称"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "description": "知识库描述"
+                                        "description": "数据库描述"
                                     },
                                     "prompt": {
                                         "type": "string",
-                                        "description": "prompt设定"
+                                        "description": "AI人设，针对数据库业务，给AI合适的身份，让回复更专业。"
                                     },
                                     "database_name": {
                                         "type": "string",
-                                        "description": "数据库名称"
+                                        "description": "连接数据库名"
                                     },
                                     "database_type": {
                                         "type": "string",
-                                        "description": "数据库类型，如：MySQL，PostgreSQL等"
+                                        "description": "数据库类型，可选值 [mysql | postgresql]"
                                     },
                                     "hostname": {
                                         "type": "string",
-                                        "description": "数据库主机名或IP地址"
+                                        "description": "数据库主机名或 IP 地址"
                                     },
                                     "port": {
                                         "type": "integer",
@@ -294,11 +294,11 @@
                                     },
                                     "username": {
                                         "type": "string",
-                                        "description": "链接数据库的用户名"
+                                        "description": "连接数据库的用户名"
                                     },
                                     "password": {
                                         "type": "string",
-                                        "description": "数据库密码，应存储加密后的密码哈希"
+                                        "description": "数据库密码"
                                     }
                                 },
                                 "required": [
@@ -410,23 +410,23 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "description": "知识库名字"
+                                                    "description": "数据库名字"
                                                 },
                                                 "description": {
                                                     "type": "string",
-                                                    "description": "知识库描述"
+                                                    "description": "数据库描述"
                                                 },
                                                 "prompt": {
                                                     "type": "string",
-                                                    "description": "prompt设定"
+                                                    "description": "AI人设"
                                                 },
                                                 "database_name": {
                                                     "type": "string",
-                                                    "description": "数据库名称"
+                                                    "description": "连接数据库名"
                                                 },
                                                 "database_type": {
                                                     "type": "string",
-                                                    "description": "数据库类型，如 MySQL, PostgreSQL"
+                                                    "description": "数据库类型"
                                                 },
                                                 "hostname": {
                                                     "type": "string",
@@ -510,9 +510,9 @@
                 "security": []
             },
             "put": {
-                "summary": "更新数据库信息",
+                "summary": "更新连接信息",
                 "deprecated": false,
-                "description": "更新指定数据库的信息。",
+                "description": "更新指定数据库的链接信息。",
                 "tags": [],
                 "parameters": [
                     {
@@ -543,23 +543,23 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "知识库名字"
+                                        "description": "数据库名字"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "description": "知识库描述"
+                                        "description": "数据库描述"
                                     },
                                     "prompt": {
                                         "type": "string",
-                                        "description": "prompt设定"
+                                        "description": "AI人设，针对数据库业务，给AI合适的身份，让回复更专业。"
                                     },
                                     "database_name": {
                                         "type": "string",
-                                        "description": "数据库名称"
+                                        "description": "连接数据库名"
                                     },
                                     "database_type": {
                                         "type": "string",
-                                        "description": "数据库类型，如 MySQL, PostgreSQL"
+                                        "description": "数据库类型，可选值 [mysql | postgresql]"
                                     },
                                     "hostname": {
                                         "type": "string",
@@ -577,18 +577,7 @@
                                         "type": "string",
                                         "description": "数据库密码"
                                     }
-                                },
-                                "required": [
-                                    "name",
-                                    "description",
-                                    "prompt",
-                                    "database_name",
-                                    "database_type",
-                                    "hostname",
-                                    "port",
-                                    "username",
-                                    "password"
-                                ]
+                                }
                             },
                             "example": {
                                 "name": "hello",
@@ -621,9 +610,9 @@
                 "security": []
             },
             "delete": {
-                "summary": "删除数据库信息",
+                "summary": "断开与数据库的连接",
                 "deprecated": false,
-                "description": "删除指定的数据库信息。",
+                "description": "断开指定的数据库连接。",
                 "tags": [],
                 "parameters": [
                     {
@@ -665,9 +654,9 @@
         },
         "/api/v1/databases/list/data": {
             "get": {
-                "summary": "获取数据库列表接口",
+                "summary": "获取数据库列表",
                 "deprecated": false,
-                "description": "",
+                "description": "获取用户的所有数据库信息列表。",
                 "tags": [],
                 "parameters": [
                     {
@@ -690,10 +679,12 @@
                                     "type": "object",
                                     "properties": {
                                         "code": {
-                                            "type": "integer"
+                                            "type": "integer",
+                                            "description": "状态码"
                                         },
                                         "message": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "description": "响应信息"
                                         },
                                         "data": {
                                             "type": "array",
@@ -710,23 +701,23 @@
                                                     },
                                                     "name": {
                                                         "type": "string",
-                                                        "description": "知识库名字"
+                                                        "description": "数据库名字"
                                                     },
                                                     "description": {
                                                         "type": "string",
-                                                        "description": "知识库描述"
+                                                        "description": "数据库描述"
                                                     },
                                                     "prompt": {
                                                         "type": "string",
-                                                        "description": "prompt设定"
+                                                        "description": "AI人设"
                                                     },
                                                     "database_name": {
                                                         "type": "string",
-                                                        "description": "数据库名称"
+                                                        "description": "连接数据库名"
                                                     },
                                                     "database_type": {
                                                         "type": "string",
-                                                        "description": "数据库类型，如 MySQL, PostgreSQL"
+                                                        "description": "数据库类型"
                                                     },
                                                     "hostname": {
                                                         "type": "string",
@@ -768,7 +759,8 @@
                                                     "updated_at",
                                                     "status"
                                                 ]
-                                            }
+                                            },
+                                            "description": "响应数据"
                                         }
                                     },
                                     "required": [
@@ -868,11 +860,11 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "description": "相应信息"
+                                            "description": "响应信息"
                                         },
                                         "data": {
                                             "type": "boolean",
-                                            "description": "数据库连接状态"
+                                            "description": "连接状态"
                                         }
                                     },
                                     "required": [
@@ -964,13 +956,13 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "description": "id"
+                                                    "description": "会话id"
                                                 }
                                             },
                                             "required": [
                                                 "id"
                                             ],
-                                            "description": "数据"
+                                            "description": "响应数据"
                                         }
                                     },
                                     "required": [
@@ -1027,16 +1019,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {}
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "",
@@ -1058,19 +1040,19 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "string",
-                                                    "description": "对话id"
+                                                    "description": "对话的 ID"
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "description": "对话名称"
+                                                    "description": "对话的名称"
                                                 },
                                                 "database_id": {
                                                     "type": "string",
-                                                    "description": "数据库id"
+                                                    "description": "数据库的 ID"
                                                 },
                                                 "user_id": {
                                                     "type": "string",
-                                                    "description": "用户id"
+                                                    "description": "用户的 ID"
                                                 },
                                                 "created_at": {
                                                     "type": "number",
@@ -1130,7 +1112,7 @@
                     {
                         "name": "conversation_id",
                         "in": "path",
-                        "description": "",
+                        "description": "对话的唯一标识符",
                         "required": true,
                         "example": "8052ec08-c034-4816-8dd8-10ddb999c90c",
                         "schema": {
@@ -1140,7 +1122,7 @@
                     {
                         "name": "x-api-key",
                         "in": "header",
-                        "description": "",
+                        "description": "密钥",
                         "required": true,
                         "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
                         "schema": {
@@ -1148,16 +1130,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {}
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "",
@@ -1183,6 +1155,16 @@
                 "tags": [],
                 "parameters": [
                     {
+                        "name": "database_id",
+                        "in": "query",
+                        "description": "数据库的 ID",
+                        "required": false,
+                        "example": "JtJHxgy0Ta7b",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "x-api-key",
                         "in": "header",
                         "description": "",
@@ -1193,27 +1175,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "database_id": {
-                                        "type": "string",
-                                        "description": "数据库id"
-                                    }
-                                },
-                                "required": [
-                                    "database_id"
-                                ]
-                            },
-                            "example": {
-                                "database_id": "xK5gnMSRxHLA"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "",
@@ -1260,7 +1221,8 @@
                                                         "description": "更新时间"
                                                     }
                                                 }
-                                            }
+                                            },
+                                            "description": "响应数据"
                                         }
                                     },
                                     "required": [
@@ -1309,16 +1271,6 @@
                         "description": "",
                         "required": true,
                         "example": "application/json",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "",
-                        "required": false,
-                        "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzEwNTY5NjQsInN1YiI6IjJkOTM2NjQ5LTJmYmQtNDBmZi1iYzkxLTRlZTIwNzY1NTBhYyJ9.CN67CGzdPPA2hYTF_wm9M2nrh07v3bGY92BmbiX1pko",
                         "schema": {
                             "type": "string"
                         }
@@ -1383,19 +1335,9 @@
                 "tags": [],
                 "parameters": [
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "",
-                        "required": true,
-                        "example": "application/json",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "x-api-key",
                         "in": "header",
-                        "description": "",
+                        "description": "密钥",
                         "required": true,
                         "example": "sk-LelkzwwFuKJuGJijZnduQzCorcecOvoHX4MGP-GxpObhw0c7mLc_p8m9hw118L8qIjlbE2ePcbs5hndxIVCkFw",
                         "schema": {
@@ -1423,7 +1365,10 @@
                                     "session_id"
                                 ]
                             },
-                            "example": "{\r\n    \"text\": \"我想知道现在知识库有哪些用户？\", // 输入的文本\r\n    \"session_id\": \"5d25fcde-eb4f-4af1-a2ad-c7a1aa68c20b\"\r\n}"
+                            "example": {
+                                "text": "我想知道现在知识库有哪些用户",
+                                "session_id": "5d25fcde-eb4f-4af1-a2ad-c7a1aa68c20b"
+                            }
                         }
                     }
                 },
@@ -1451,6 +1396,38 @@
                                                     "properties": {
                                                         "type": {
                                                             "type": "string"
+                                                        },
+                                                        "chart_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "x_axis_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "y_axis_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "labels": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "datasets": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "label": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "data": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "integer"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
                                                         },
                                                         "data": {
                                                             "type": "object",
@@ -1598,16 +1575,28 @@
                                                     },
                                                     "required": [
                                                         "type",
+                                                        "chart_name",
+                                                        "x_axis_name",
+                                                        "y_axis_name",
+                                                        "labels",
+                                                        "datasets",
                                                         "data",
                                                         "options"
-                                                    ]
+                                                    ],
+                                                    "description": "图表数据"
+                                                },
+                                                "chart_image": {
+                                                    "type": "string",
+                                                    "description": "图表图片url"
                                                 },
                                                 "text": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "description": "回复的文本数据"
                                                 }
                                             },
                                             "required": [
                                                 "chart_data",
+                                                "chart_image",
                                                 "text"
                                             ],
                                             "description": "返回的数据，包括图表和文本"
