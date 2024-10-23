@@ -1266,16 +1266,6 @@
                 "tags": [],
                 "parameters": [
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "",
-                        "required": true,
-                        "example": "application/json",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "x-api-key",
                         "in": "header",
                         "description": "",
@@ -1312,7 +1302,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "表示流程执行过程的信息。",
                         "content": {
                             "application/json": {
                                 "schema": {
