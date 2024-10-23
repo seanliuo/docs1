@@ -956,7 +956,7 @@
                                     "properties": {
                                         "code": {
                                             "type": "integer",
-                                            "description": "响应状态码"
+                                            "description": "响应状态码，各状态说明请查阅[此处](/api-reference/example#response-code)"
                                         },
                                         "message": {
                                             "type": "string",
