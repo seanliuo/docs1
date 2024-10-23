@@ -24,10 +24,9 @@ description: '帮助你快速接入数据分析AI服务'
 ## 会话&聊天测试
 1. **会话**指的是某一次和AI的互动，由一个或者多个**聊天**组成。
 1. 在开始和AI的聊天互动前，必须先指定会话。可以[新建会话](https://mccc.mintlify.app/api-reference/endpoint/conversation_create)，也可以选择某一个已经存在的会话，继续聊天。每个会话都有独立的session_id来指定。
-1. **（注意：一旦产生AI服务用量，就会开始计算试用时长）** 在指定的会话下新建聊天。这里我们提供了两种方案供信息化人员进行选择，一种是[常规响应](https://mccc.mintlify.app/api-reference/endpoint/chat_)，另一种是[流式响应](https://mccc.mintlify.app/api-reference/endpoint/chat_stream)。流式响应会将聊天内容以打字机形式返回，对用户的等待体验更友好。实际采用的方案请结合生产需要进行选取。
+1. **<u>（注意：一旦产生AI服务用量，就会开始计算试用时长）</u>** 在指定的会话下新建聊天。这里我们提供了两种方案供信息化人员进行选择，一种是[常规响应](https://mccc.mintlify.app/api-reference/endpoint/chat_)，另一种是[流式响应](https://mccc.mintlify.app/api-reference/endpoint/chat_stream)。流式响应会将聊天内容以打字机形式返回，对用户的等待体验更友好。实际采用的方案请结合生产需要进行选取。
 1. 在进行聊天测试后，通过[获取会话信息](https://mccc.mintlify.app/api-reference/endpoint/conversation_getbyid)操作可翻看聊天记录。
-1. 信息化人员可结合业务场景的不同，分配不同的API-key，从而让一系列的会话只与某个业务场景做关联。对话列表可通过指定API-key来进行[查询](https://mccc.mintlify.app/api-reference/endpoint/conversation_getlist)。
-
+1. Tips：信息化人员可结合业务场景的不同，分配不同的API-key，从而让一系列的会话只与某个业务场景做关联。[对话列表](https://mccc.mintlify.app/api-reference/endpoint/conversation_getlist)可通过指定API-key来进行查询。
 
 
 # 接口相关信息的统一说明
@@ -50,7 +49,7 @@ code | 状态说明 | 适用情况
 600 | 响应成功 | 常规响应
 700 | 响应失败 | 常规响应
 601 | 表示流程执行到了哪个阶段 | 流式响应
-602 | 流式对话内容输出的正文内容 | 流式响应
+602 | 流式响应输出的聊天正文 | 流式响应
 603 | 图表数据和对应的图片链接 | 流式响应
 
 
