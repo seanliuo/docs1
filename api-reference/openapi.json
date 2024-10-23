@@ -23,7 +23,7 @@
             "post": {
                 "summary": "聊天流式",
                 "deprecated": false,
-                "description": "与系统进行实时聊天，获取流式数据分析结果。",
+                "description": "与系统进行聊天，并获取相关数据分析结果。在完整结果返回前，会保持流式响应，陆续回传相关的回答内容。",
                 "tags": [],
                 "parameters": [
                     {
@@ -153,7 +153,7 @@
             "post": {
                 "summary": "聊天",
                 "deprecated": false,
-                "description": "与系统进行聊天，并获取相关数据分析结果。",
+                "description": "与系统进行聊天，并获取相关数据分析结果。在完整结果返回前，需保持等待。",
                 "tags": [],
                 "parameters": [
                     {
@@ -498,7 +498,7 @@
             "post": {
                 "summary": "创建对话信息",
                 "deprecated": false,
-                "description": "创建新的对话信息。",
+                "description": "创建新的会话",
                 "tags": [],
                 "parameters": [
                     {
@@ -598,7 +598,7 @@
             "get": {
                 "summary": "获取对话信息",
                 "deprecated": false,
-                "description": "通过 ID 获取对话信息。",
+                "description": "根据会话ID获取指定的会话",
                 "tags": [],
                 "parameters": [
                     {
@@ -710,7 +710,7 @@
             "delete": {
                 "summary": "删除对话信息",
                 "deprecated": false,
-                "description": "删除指定 ID 的对话信息。",
+                "description": "根据会话ID删除指定的会话",
                 "tags": [],
                 "parameters": [
                     {
@@ -755,7 +755,7 @@
             "get": {
                 "summary": "获取用户对话列表",
                 "deprecated": false,
-                "description": "获取指定数据库 ID 下用户的对话列表。",
+                "description": "获取指定连接关系下的会话列表",
                 "tags": [],
                 "parameters": [
                     {
