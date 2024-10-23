@@ -32,7 +32,7 @@
       ]
     },
     {
-      "group": "数据库（知识库）接口",
+      "group": "连接接口",
       "pages": [
         "api-reference/endpoint/databases_create",
         "api-reference/endpoint/databases_getbyid",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "group": "Chat接口",
+      "group": "聊天接口",
       "pages": [
         "api-reference/endpoint/chat_",
         "api-reference/endpoint/chat_stream"
