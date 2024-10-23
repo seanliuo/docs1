@@ -1310,7 +1310,7 @@
                                     "properties": {
                                         "code": {
                                             "type": "integer",
-                                            "description": "601"
+                                            "description": "状态码：600结束的信号，601表示流程执行过程的信息，602流式对话内容输出的正文内容，603图表数据和生成的图表图片数据。"
                                         },
                                         "message": {
                                             "type": "string",
@@ -1343,37 +1343,42 @@
                                             "message": "success",
                                             "data": "根据当前检索到的数据，知识库中当前活跃用户的信息如下：\n\n- **用户ID**：Rg91sWb5\n- **邮箱**：123@qq.com\n- **用户名**：zhou\n\n### 数据分析\n- **图表类型**：饼图\n- **图表名称**：用户分布（User Distribution）\n- **X轴**：用户\n- **Y轴**：数量\n- 数据集显示当前活跃用户的数量为1。\n\n### 见解\n当前的知识库用户数据仅显示了一名活跃用户。如果需要更多用户信息或更详细的分析，建议检查数据源的完整性和检索条件的准确性。"
                                         }
-                                    }
-                                }
-                            }
-                        },
-                        "headers": {}
-                    },
-                    "x-200:成功": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "integer",
-                                            "description": "602"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "description": "响应状态"
-                                        },
-                                        "data": {
-                                            "type": "string",
-                                            "description": "正文内容"
+                                    },
+                                    "3": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 603,
+                                            "message": "success",
+                                            "data": {
+                                                "chart_data": {
+                                                    "type": "bar",
+                                                    "chart_name": "用户列表",
+                                                    "x_axis_name": "用户ID",
+                                                    "y_axis_name": "用户数量",
+                                                    "labels": [
+                                                        "Rg91sWb5"
+                                                    ],
+                                                    "datasets": [
+                                                        {
+                                                            "label": "用户数量",
+                                                            "data": [
+                                                                1
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "chart_image": "https://hyletic-runtime.s3.amazonaws.com/assets-create/2024/10/22/ee3efa4e-986.png"
+                                            }
                                         }
                                     },
-                                    "required": [
-                                        "code",
-                                        "message",
-                                        "data"
-                                    ]
+                                    "4": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 600,
+                                            "message": "success",
+                                            "data": "{}"
+                                        }
+                                    }
                                 }
                             }
                         },
