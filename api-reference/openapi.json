@@ -888,11 +888,11 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例**：\n人事业务库、营销业务库"
+                                        "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例:**  \n人事业务库、营销业务库"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例**：\n服务于库存管理的业务场景"
+                                        "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例:**  \n服务于库存管理的业务场景"
                                     },
                                     "prompt": {
                                         "type": "string",
@@ -1059,11 +1059,11 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例**：\n人事业务库、营销业务库"
+                                                    "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例:**  \n人事业务库、营销业务库"
                                                 },
                                                 "description": {
                                                     "type": "string",
-                                                    "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例**：\n服务于库存管理的业务场景"
+                                                    "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例:**  \n服务于库存管理的业务场景"
                                                 },
                                                 "prompt": {
                                                     "type": "string",
@@ -1192,11 +1192,11 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例**：\n人事业务库、营销业务库"
+                                        "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例:**  \n人事业务库、营销业务库"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例**：\n服务于库存管理的业务场景"
+                                        "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例:**  \n服务于库存管理的业务场景"
                                     },
                                     "prompt": {
                                         "type": "string",
@@ -1350,11 +1350,11 @@
                                                     },
                                                     "name": {
                                                         "type": "string",
-                                                        "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例**：\n人事业务库、营销业务库"
+                                                        "description": "自定义名称，用于识别对应的业务场景。\n\n> **示例:**  \n人事业务库、营销业务库"
                                                     },
                                                     "description": {
                                                         "type": "string",
-                                                        "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例**：\n服务于库存管理的业务场景"
+                                                        "description": "自定义描述，用于补充说明该连接对应的业务场景信息。\n\n> **示例:**  \n服务于库存管理的业务场景"
                                                     },
                                                     "prompt": {
                                                         "type": "string",
