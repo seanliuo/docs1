@@ -1317,7 +1317,35 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {}
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "description": "601"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "响应状态"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "description": "回答内容"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "1": {
+                                        "summary": "成功示例",
+                                        "value": {
+                                            "code": 601,
+                                            "message": "success",
+                                            "data": "I'm generating a chart for you..."
+                                        }
+                                    }
                                 }
                             }
                         },
