@@ -1099,7 +1099,7 @@
                                                 },
                                                 "status": {
                                                     "type": "boolean",
-                                                    "description": "数据库连接状态"
+                                                    "description": "数据库连接状态，如未出现\"true\"字样，需排查原因。"
                                                 }
                                             },
                                             "required": [
@@ -1390,7 +1390,7 @@
                                                     },
                                                     "status": {
                                                         "type": "boolean",
-                                                        "description": "数据库连接状态"
+                                                        "description": "数据库连接状态，如未出现\"true\"字样，需排查原因。"
                                                     }
                                                 },
                                                 "required": [
@@ -1513,7 +1513,7 @@
                                         },
                                         "data": {
                                             "type": "boolean",
-                                            "description": "数据库连接状态"
+                                            "description": "数据库连接状态，如未出现\"true\"字样，需排查原因。"
                                         }
                                     },
                                     "required": [
